@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -24,11 +25,14 @@ fun CustomContainer(
     cornerRadius: Dp = 12.dp,
     borderWidth: Dp = 2.dp,
     borderColor: Color = AppTheme.colors.borderDefault,
+    containerColor: Color = Color.Transparent,
     content: @Composable () -> Unit
 ) {
     Box(
         modifier = modifier
             .border(width = borderWidth, color = borderColor, shape = RoundedCornerShape(cornerRadius))
+            .clip(shape = RoundedCornerShape(cornerRadius))
+            .background(color = containerColor)
     )
     {
         content()
