@@ -1,10 +1,8 @@
 package com.lazypeanut.cityrealtimeweather.ui.selectArea.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -19,10 +17,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lazypeanut.cityrealtimeweather.ui.components.Checkmark
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomContainer
+import com.lazypeanut.cityrealtimeweather.ui.components.PreviewContainer
 import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 
 @Composable
-fun SelectCityItem(
+fun SelectAreaItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     cardColor: Color = AppTheme.colors.surfaceContainer,
@@ -34,8 +33,8 @@ fun SelectCityItem(
     CustomContainer(
         modifier = modifier.fillMaxWidth(),
         containerColor = cardColor,
-        borderColor = if(isSelected) AppTheme.colors.borderActive else AppTheme.colors.outline
-        ) {
+        borderColor = if (isSelected) AppTheme.colors.borderActive else AppTheme.colors.outline
+    ) {
         Row(
             modifier = Modifier
                 .padding(
@@ -77,12 +76,44 @@ fun SelectCityItem(
 
 @Preview
 @Composable
-private fun SelectCityItemPreview() {
-    Column(
-        modifier = Modifier.background(color = Color.White).padding(12.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
-        SelectCityItem(cityName = "Bengaluru", numberOfStations = "25")
-        SelectCityItem(cityName = "Bengaluru", numberOfStations = "25", isSelected = true)
+private fun SelectAreaItemPreview() {
+    PreviewContainer {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            SelectAreaItem(cityName = "Bengaluru", numberOfStations = "25")
+            SelectAreaItem(cityName = "Bengaluru", numberOfStations = "25", isSelected = true)
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SelectAreaItem(
+                    cityName = "HSR Layout",
+                    isSelected = true,
+                    modifier = Modifier.weight(1f)
+                )
+                SelectAreaItem(
+                    cityName = "BTM LAYOUT",
+                    isSelected = false,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                SelectAreaItem(
+                    cityName = "JP NAGAR",
+                    isSelected = false,
+                    modifier = Modifier.weight(1f)
+                )
+                SelectAreaItem(
+                    cityName = "JAYANAGAR",
+                    isSelected = false,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
     }
 }

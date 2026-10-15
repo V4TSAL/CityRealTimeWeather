@@ -30,7 +30,11 @@ fun CustomContainer(
 ) {
     Box(
         modifier = modifier
-            .border(width = borderWidth, color = borderColor, shape = RoundedCornerShape(cornerRadius))
+            .border(
+                width = borderWidth,
+                color = borderColor,
+                shape = RoundedCornerShape(cornerRadius)
+            )
             .clip(shape = RoundedCornerShape(cornerRadius))
             .background(color = containerColor)
     )
@@ -45,12 +49,29 @@ fun CustomContainerPreview() {
     Box(modifier = Modifier.background(color = Color.Black)) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             CustomContainer(modifier = Modifier.padding(4.dp)) {
-                Spacer(modifier = Modifier.fillMaxWidth().height(36.dp).padding(12.dp))
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(36.dp)
+                    .padding(12.dp))
             }
 
             CustomContainer(modifier = Modifier.padding(4.dp), borderColor = AppTheme.colors.borderActive) {
-                Spacer(modifier = Modifier.fillMaxWidth().height(36.dp).padding(12.dp))
+                Spacer(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(36.dp)
+                    .padding(12.dp))
             }
         }
+    }
+}
+
+@Composable
+fun PreviewContainer(
+    modifier: Modifier = Modifier,
+    containerColor: Color = AppTheme.colors.surfaceContainerLowest,
+    content: @Composable () -> Unit
+) {
+    Box(modifier = modifier.background(containerColor)){
+        content()
     }
 }

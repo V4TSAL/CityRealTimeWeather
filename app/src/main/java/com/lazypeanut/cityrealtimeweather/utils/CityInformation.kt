@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather
+package com.lazypeanut.cityrealtimeweather.utils
 
 enum class DeviceType(val code: Int, val label: String) {
     AUTOMATED_WEATHER_SYSTEM(1, "Automated weather system"),
@@ -7,7 +7,7 @@ enum class DeviceType(val code: Int, val label: String) {
     val rawValue: String get() = "$code - $label"
 
     companion object {
-        fun fromRaw(raw: String): DeviceType? = values().firstOrNull { it.rawValue == raw }
+        fun fromRaw(raw: String): DeviceType? = entries.firstOrNull { it.rawValue == raw }
     }
 }
 
