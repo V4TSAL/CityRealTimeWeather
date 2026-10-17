@@ -20,6 +20,12 @@ data class WeatherLocality(
     val deviceType: DeviceType,
 )
 
+data class CityInformation(
+    val cityName: String? = null,
+    val totalCities: Int? = null,
+    val isSelected: Boolean = false
+)
+
 val weatherLocalities: List<WeatherLocality> = listOf(
     WeatherLocality("Delhi NCR", "Sarita Vihar", "ZWL005764", 28.531759, 77.293973, DeviceType.AUTOMATED_WEATHER_SYSTEM),
     WeatherLocality("Delhi NCR", "Faridabad Sector 41-50", "ZWL008752", 28.460895, 77.304764, DeviceType.AUTOMATED_WEATHER_SYSTEM),
@@ -604,4 +610,8 @@ val weatherLocalities: List<WeatherLocality> = listOf(
 )
 
 
-val s = weatherLocalities.groupBy { it.cityName }
+val supportedAreasMap = weatherLocalities.groupBy { it.cityName }
+
+val supportedCityList = supportedAreasMap.map { (string, localities) ->
+    CityInformation(cityName = string, totalCities = localities.size)
+}
