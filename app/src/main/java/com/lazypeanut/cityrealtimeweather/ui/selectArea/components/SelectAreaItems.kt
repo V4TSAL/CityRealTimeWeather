@@ -1,5 +1,6 @@
 package com.lazypeanut.cityrealtimeweather.ui.selectArea.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,10 +29,13 @@ fun SelectAreaItem(
     cityName: String? = null,
     numberOfStations: String? = null,
     cityFontColor: Color = AppTheme.colors.onSurface,
-    numberOfStationsFontColor: Color = AppTheme.colors.onSurfaceVariant
+    numberOfStationsFontColor: Color = AppTheme.colors.onSurfaceVariant,
+    onTap: () -> Unit = {}
 ) {
     CustomContainer(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().clickable{
+            onTap()
+        },
         containerColor = cardColor,
         borderColor = if (isSelected) AppTheme.colors.borderActive else AppTheme.colors.outline
     ) {

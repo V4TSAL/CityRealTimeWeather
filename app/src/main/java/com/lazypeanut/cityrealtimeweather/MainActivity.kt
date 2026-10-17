@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.SelectCityListView
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectAreaItem
 import com.lazypeanut.cityrealtimeweather.ui.theme.CityRealTimeWeatherTheme
@@ -41,9 +42,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CityRealTimeWeatherTheme {
-                SelectCityListView(
-                    cityList = supportedCityList
-                )
+                Scaffold { innerPadding ->
+                    BaseScreen(modifier = Modifier.padding(innerPadding)) {
+                        SelectCityListView(
+                            cityList = supportedCityList
+                        )
+                    }
+                }
             }
         }
     }

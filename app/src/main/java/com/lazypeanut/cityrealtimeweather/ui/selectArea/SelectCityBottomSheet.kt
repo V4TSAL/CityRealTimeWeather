@@ -15,15 +15,19 @@ import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
 @Composable
 fun SelectCityListView(
     modifier: Modifier = Modifier,
-    cityList: List<CityInformation>? = null
+    cityList: List<CityInformation>? = null,
+    onTap: (Int) -> Unit = {}
 ) {
     cityList?.let {
         LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            itemsIndexed(it, key = { index, item -> "$index _ ${item.cityName}" }) { _, item ->
+            itemsIndexed(it, key = { index, item -> "$index _ ${item.cityName}" }) { index, item ->
                 SelectAreaItem(
                     isSelected = item.isSelected,
                     cityName = item.cityName,
-                    numberOfStations = "${item.totalCities}"
+                    numberOfStations = "${item.totalCities}",
+                    onTap = {
+                        onTap(index)
+                    }
                 )
             }
         }
