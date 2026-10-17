@@ -24,8 +24,11 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
+import com.lazypeanut.cityrealtimeweather.ui.selectArea.SelectAreaScreen
+import com.lazypeanut.cityrealtimeweather.ui.selectArea.SelectCityBottomSheet
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.SelectCityListView
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectAreaItem
+import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 import com.lazypeanut.cityrealtimeweather.ui.theme.CityRealTimeWeatherTheme
 import com.lazypeanut.cityrealtimeweather.utils.supportedAreasMap
 import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
@@ -42,11 +45,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CityRealTimeWeatherTheme {
-                Scaffold { innerPadding ->
+                Scaffold(
+                    containerColor = AppTheme.colors.surfaceContainerLowest
+                ) { innerPadding ->
                     BaseScreen(modifier = Modifier.padding(innerPadding)) {
-                        SelectCityListView(
-                            cityList = supportedCityList
-                        )
+                        SelectAreaScreen()
                     }
                 }
             }

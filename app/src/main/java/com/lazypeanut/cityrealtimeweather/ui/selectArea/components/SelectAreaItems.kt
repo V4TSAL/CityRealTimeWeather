@@ -25,9 +25,9 @@ import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 fun SelectAreaItem(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
-    cardColor: Color = AppTheme.colors.surfaceContainer,
     cityName: String? = null,
     numberOfStations: String? = null,
+    cardColor: Color = AppTheme.colors.surfaceContainer,
     cityFontColor: Color = AppTheme.colors.onSurface,
     numberOfStationsFontColor: Color = AppTheme.colors.onSurfaceVariant,
     onTap: () -> Unit = {}
