@@ -6,37 +6,53 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
+import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SelectAreaScreen(
     modifier: Modifier = Modifier,
-    viewModel: SelectAreaViewModel = hiltViewModel()
+    viewModel: SelectAreaViewModel = hiltViewModel(),
+    selectAreaScreenState: SelectAreaScreenState = rememberSelectAreaScreenState()
 ) {
-    var showBottomSheet by remember { mutableStateOf(false) }
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     BaseScreen(modifier = Modifier) {
-        if (showBottomSheet) {
+        if (selectAreaScreenState.showBottomSheet) {
             SelectCityBottomSheet(
+                sheetState = selectAreaScreenState.selectCityBottomSheetState,
+                cityList = uiState.tempCityList,
                 bottomSheetDismissRequest = {
-                    showBottomSheet = false
+                    selectAreaScreenState.closeBottomSheet()
+                    viewModel.selectCityBottomSheetClosed(isCityConfirmed = false)
                 },
                 confirmAreaSelection = {
-                    showBottomSheet = false
+                    selectAreaScreenState.closeBottomSheet()
+                    viewModel.selectCityBottomSheetClosed(isCityConfirmed = true)
+                },
+                onCityItemTap = {itemIndex ->
+                    viewModel.updateTempSelectedCity(itemIndex)
                 }
             )
         }
         Column {
             Box(modifier = Modifier.clickable {
-                showBottomSheet = true
+                selectAreaScreenState.openBottomSheet()
             }) {
-                Text("Hello")
+                Column() {
+                    Text("Hello")
+                    uiState.currentSelectedCity?.let {
+                        Text("Current Selected City is : ${it.cityName.orEmpty()}")
+                    }
+                }
             }
         }
     }

@@ -18,12 +18,14 @@ data class WeatherLocality(
     val latitude: Double,
     val longitude: Double,
     val deviceType: DeviceType,
+    val isSelected: Boolean = false
 )
 
 data class CityInformation(
     val cityName: String? = null,
     val totalCities: Int? = null,
-    val isSelected: Boolean = false
+    val isSelected: Boolean = false,
+    val cityLocalities: List<WeatherLocality>? = null
 )
 
 val weatherLocalities: List<WeatherLocality> = listOf(
@@ -612,6 +614,6 @@ val weatherLocalities: List<WeatherLocality> = listOf(
 
 val supportedAreasMap = weatherLocalities.groupBy { it.cityName }
 
-val supportedCityList = supportedAreasMap.map { (string, localities) ->
-    CityInformation(cityName = string, totalCities = localities.size)
+val supportedCityList = supportedAreasMap.map{ (string, localities) ->
+    CityInformation(cityName = string, totalCities = localities.size, isSelected = string == "Delhi NCR", cityLocalities = localities)
 }

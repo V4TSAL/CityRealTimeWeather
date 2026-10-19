@@ -41,8 +41,10 @@ import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
 fun SelectCityBottomSheet(
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    cityList: List<CityInformation>? = null,
     bottomSheetDismissRequest: () -> Unit,
     confirmAreaSelection: () -> Unit,
+    onCityItemTap: (index: Int) -> Unit = {}
 ) {
     ModalBottomSheet(
         modifier = modifier,
@@ -54,7 +56,9 @@ fun SelectCityBottomSheet(
                 .fillMaxHeight(0.6f)
                 .padding(horizontal = 20.dp),
             confirmAreaSelection = confirmAreaSelection,
-            bottomSheetDismissRequest = bottomSheetDismissRequest
+            bottomSheetDismissRequest = bottomSheetDismissRequest,
+            cityList = cityList,
+            onCityItemTap = onCityItemTap
         )
     }
 }
@@ -64,8 +68,10 @@ fun SelectCityBottomSheet(
 fun SelectCityBottomSheetContent(
     modifier: Modifier = Modifier,
     headerFontColor: Color = AppTheme.colors.onSurface,
+    cityList: List<CityInformation>? = null,
     confirmAreaSelection: () -> Unit = {},
-    bottomSheetDismissRequest: () -> Unit = {}
+    bottomSheetDismissRequest: () -> Unit = {},
+    onCityItemTap: (index: Int) -> Unit = {}
 ) {
     Scaffold(
         modifier = modifier,
@@ -105,7 +111,8 @@ fun SelectCityBottomSheetContent(
                 )
             }
             SelectCityListView(
-                cityList = supportedCityList
+                cityList = cityList,
+                onTap = onCityItemTap
             )
         }
     }
