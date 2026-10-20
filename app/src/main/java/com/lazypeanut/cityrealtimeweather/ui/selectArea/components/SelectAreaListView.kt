@@ -3,7 +3,6 @@ package com.lazypeanut.cityrealtimeweather.ui.selectArea.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -43,7 +42,7 @@ fun SelectCityListView(
 fun SelectLocalityGridView(
     modifier: Modifier = Modifier,
     localityList: List<WeatherLocality>? = null,
-    onTap: (Int) -> Unit = {}
+    onTap: (String) -> Unit = {}
 ) {
     localityList?.let {
         LazyVerticalGrid(
@@ -58,7 +57,7 @@ fun SelectLocalityGridView(
                     cityName = item.localityName,
                     numberOfStations = null,
                     onTap = {
-                        onTap(index)
+                        onTap(item.localityId)
                     }
                 )
             }

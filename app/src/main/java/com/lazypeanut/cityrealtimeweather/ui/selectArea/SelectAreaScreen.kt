@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
+import com.lazypeanut.cityrealtimeweather.ui.components.CustomButton
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomSearchBar
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.bottomSheet.SelectCityBottomSheet
 import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.CurrentSelectedCityItem
@@ -34,44 +36,65 @@ fun SelectAreaScreen(
     selectAreaScreenState: SelectAreaScreenState = rememberSelectAreaScreenState()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    BaseScreen(modifier = modifier) {
-        if (selectAreaScreenState.showBottomSheet) {
-            SelectCityBottomSheet(
-                sheetState = selectAreaScreenState.selectCityBottomSheetState,
-                cityList = uiState.tempCityList,
-                bottomSheetDismissRequest = {
-                    selectAreaScreenState.closeBottomSheet()
-                    viewModel.selectCityBottomSheetClosed(isCityConfirmed = false)
-                },
-                confirmAreaSelection = {
-                    selectAreaScreenState.closeBottomSheet()
-                    viewModel.selectCityBottomSheetClosed(isCityConfirmed = true)
-                },
-                onCityItemTap = { itemIndex ->
-                    viewModel.updateTempSelectedCity(itemIndex)
-                }
-            )
-        }
-        Column(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Column{
-            Text("Area Selection", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-            Text("Choose the areas which you would like to track for weather alerts.", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Normal)
+    Scaffold(
+        bottomBar = {
+            CustomButton(
+                modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth(), buttonText = "Add Localities"
+            ) { }
+        }) { innerPadding ->
+        BaseScreen(modifier = modifier.padding(bottom = innerPadding.calculateBottomPadding() + 8.dp)) {
+            if (selectAreaScreenState.showBottomSheet) {
+                SelectCityBottomSheet(
+                    sheetState = selectAreaScreenState.selectCityBottomSheetState,
+                    cityList = uiState.tempCityList,
+                    bottomSheetDismissRequest = {
+                        selectAreaScreenState.closeBottomSheet()
+                        viewModel.selectCityBottomSheetClosed(isCityConfirmed = false)
+                    },
+                    confirmAreaSelection = {
+                        selectAreaScreenState.closeBottomSheet()
+                        viewModel.selectCityBottomSheetClosed(isCityConfirmed = true)
+                    },
+                    onCityItemTap = { itemIndex ->
+                        viewModel.updateTempSelectedCity(itemIndex)
+                    })
             }
-            CustomSearchBar(
-                modifier = Modifier.fillMaxWidth(),
-                searchValue = uiState.localitySearchValue
-            ) { newValue ->
-                viewModel.searchLocality(newValue)
-            }
-            SelectLocalityGridView(
-                localityList = uiState.searchLocalityList,
-                onTap = {index ->
-                    viewModel.selectLocality(index)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                CurrentSelectedCityItem(
+                    modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+                    cityName = uiState.currentSelectedCity?.cityName
+                ) {
+                    selectAreaScreenState.openBottomSheet()
                 }
-            )
+                Column {
+                    Text(
+                        "Area Selection",
+                        color = Color.White,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Text(
+                        "Choose the areas which you would like to track for weather alerts.",
+                        color = Color.White,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal
+                    )
+                }
+                CustomSearchBar(
+                    modifier = Modifier.fillMaxWidth(), searchValue = uiState.localitySearchValue
+                ) { newValue ->
+                    viewModel.searchLocality(newValue)
+                }
+                SelectLocalityGridView(
+                    localityList = uiState.searchLocalityList, onTap = { localityId ->
+                        viewModel.selectLocality(localityId)
+                    })
+            }
         }
     }
 }

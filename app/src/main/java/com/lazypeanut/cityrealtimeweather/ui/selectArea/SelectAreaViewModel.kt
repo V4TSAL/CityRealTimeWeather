@@ -1,11 +1,10 @@
 package com.lazypeanut.cityrealtimeweather.ui.selectArea
 
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.toLowerCase
 import androidx.lifecycle.ViewModel
 import com.lazypeanut.cityrealtimeweather.utils.CityInformation
 import com.lazypeanut.cityrealtimeweather.utils.WeatherLocality
 import com.lazypeanut.cityrealtimeweather.utils.currentSelectedCity
+import com.lazypeanut.cityrealtimeweather.utils.filterLocalities
 import com.lazypeanut.cityrealtimeweather.utils.selectAt
 import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +21,8 @@ data class SelectAreaScreenUiState(
     val currentSelectedCity: CityInformation? = supportedCityList.currentSelectedCity(),
     val localitiesForCurrentSelectedCity: List<WeatherLocality>? = supportedCityList.currentSelectedCity()?.cityLocalities,
     val searchLocalityList: List<WeatherLocality>? = supportedCityList.currentSelectedCity()?.cityLocalities,
-    val localitySearchValue: String = ""
+    val localitySearchValue: String = "",
+    val citySearchValue: String = ""
 )
 
 @HiltViewModel
@@ -55,10 +55,10 @@ class SelectAreaViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun selectLocality(index: Int) {
+    fun selectLocality(localityId: String) {
         val newListValue =
             _uiState.value.localitiesForCurrentSelectedCity?.mapIndexed { idx, locality ->
-                if (idx == index) {
+                if (locality.localityId == localityId) {
                     locality.copy(isSelected = !locality.isSelected)
                 } else {
                     locality
@@ -66,24 +66,17 @@ class SelectAreaViewModel @Inject constructor() : ViewModel() {
             }
         _uiState.update {
             it.copy(
-                localitiesForCurrentSelectedCity = newListValue
+                localitiesForCurrentSelectedCity = newListValue,
+                searchLocalityList = newListValue?.filterLocalities(it.localitySearchValue) ?: newListValue
             )
         }
     }
 
     fun searchLocality(value: String) {
-        val searchValue = value.toLowerCase(Locale.current)
-        val filteredLocalityList = _uiState.value.localitiesForCurrentSelectedCity?.filter {
-            it.localityName.toLowerCase(Locale.current).contains(searchValue)
-        }
         _uiState.update {
             it.copy(
                 localitySearchValue = value,
-                searchLocalityList = if (searchValue.isNotEmpty()) {
-                    filteredLocalityList
-                } else {
-                    it.localitiesForCurrentSelectedCity
-                }
+                searchLocalityList = it.localitiesForCurrentSelectedCity?.filterLocalities(value) ?: it.localitiesForCurrentSelectedCity
             )
         }
     }
