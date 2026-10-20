@@ -25,7 +25,7 @@ fun CustomContainer(
     cornerRadius: Dp = 12.dp,
     borderWidth: Dp = 2.dp,
     borderColor: Color = AppTheme.colors.borderDefault,
-    containerColor: Color = Color.Transparent,
+    containerColor: Color = AppTheme.colors.surfaceContainer,
     content: @Composable () -> Unit
 ) {
     Box(
@@ -49,17 +49,24 @@ fun CustomContainerPreview() {
     Box(modifier = Modifier.background(color = Color.Black)) {
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             CustomContainer(modifier = Modifier.padding(4.dp)) {
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(36.dp)
-                    .padding(12.dp))
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(36.dp)
+                        .padding(12.dp)
+                )
             }
 
-            CustomContainer(modifier = Modifier.padding(4.dp), borderColor = AppTheme.colors.borderActive) {
-                Spacer(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(36.dp)
-                    .padding(12.dp))
+            CustomContainer(
+                modifier = Modifier.padding(4.dp),
+                borderColor = AppTheme.colors.borderActive
+            ) {
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(36.dp)
+                        .padding(12.dp)
+                )
             }
         }
     }
@@ -71,7 +78,7 @@ fun PreviewContainer(
     containerColor: Color = AppTheme.colors.surfaceContainerLowest,
     content: @Composable () -> Unit
 ) {
-    Box(modifier = modifier.background(containerColor)){
+    Box(modifier = modifier.background(containerColor)) {
         content()
     }
 }

@@ -33,14 +33,15 @@ fun SelectAreaItem(
     onTap: () -> Unit = {}
 ) {
     CustomContainer(
-        modifier = modifier.fillMaxWidth().clickable{
-            onTap()
-        },
+        modifier = modifier.fillMaxWidth(),
         containerColor = cardColor,
         borderColor = if (isSelected) AppTheme.colors.borderActive else AppTheme.colors.outline
     ) {
         Row(
             modifier = Modifier
+                .clickable{
+                    onTap()
+                }
                 .padding(
                     horizontal = 14.dp, vertical = if (isSelected) 18.dp else 22.dp
                 )

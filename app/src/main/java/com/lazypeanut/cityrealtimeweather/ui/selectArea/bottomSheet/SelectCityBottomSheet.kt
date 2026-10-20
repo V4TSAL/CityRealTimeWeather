@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea
+package com.lazypeanut.cityrealtimeweather.ui.selectArea.bottomSheet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,17 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomButton
 import com.lazypeanut.cityrealtimeweather.ui.components.PreviewContainer
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectAreaItem
+import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectCityListView
 import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 import com.lazypeanut.cityrealtimeweather.utils.CityInformation
-import com.lazypeanut.cityrealtimeweather.utils.supportedCityList
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -128,35 +123,5 @@ private fun SelectCityBottomSheetContentPreview() {
 }
 
 
-@Composable
-fun SelectCityListView(
-    modifier: Modifier = Modifier,
-    cityList: List<CityInformation>? = null,
-    onTap: (Int) -> Unit = {}
-) {
-    cityList?.let {
-        LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
-            itemsIndexed(it, key = { index, item -> "$index _ ${item.cityName}" }) { index, item ->
-                SelectAreaItem(
-                    isSelected = item.isSelected,
-                    cityName = item.cityName,
-                    numberOfStations = "${item.totalCities}",
-                    onTap = {
-                        onTap(index)
-                    }
-                )
-            }
-        }
-    }
-}
 
-@Preview
-@Composable
-private fun SelectCityListViewPreview() {
-    PreviewContainer {
-        SelectCityListView(
-            cityList = supportedCityList
-        )
-    }
-}
 

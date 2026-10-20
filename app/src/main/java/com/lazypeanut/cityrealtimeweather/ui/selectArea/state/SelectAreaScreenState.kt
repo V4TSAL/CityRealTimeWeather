@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea
+package com.lazypeanut.cityrealtimeweather.ui.selectArea.state
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
