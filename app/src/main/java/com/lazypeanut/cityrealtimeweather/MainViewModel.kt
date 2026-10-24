@@ -56,4 +56,9 @@ class MainViewModel @Inject constructor(val apiRepo: ApiRepo) : ViewModel() {
 
         }
     }
+    fun getWeatherSummaryForDeviceId(deviceId : String = "123456789"){
+        viewModelScope.launch {
+            apiRepo.getWeatherSummaryForDeviceId(deviceId)
+        }
+    }
 }

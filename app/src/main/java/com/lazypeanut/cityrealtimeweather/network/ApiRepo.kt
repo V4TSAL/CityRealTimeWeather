@@ -6,4 +6,5 @@ interface ApiRepo {
     suspend fun getDataByLocalityId() : Result<ApiResponseModel<LocalityWeatherData>>
     suspend fun sendTestNotification() : Unit
     suspend fun sendDeviceInformation(deviceInfo: DeviceInformation) : Unit
+    suspend fun getWeatherSummaryForDeviceId(deviceId: String) : Unit
 }

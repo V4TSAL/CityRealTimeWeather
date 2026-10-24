@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea.bottomSheet
+package com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.bottomSheet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomButton
 import com.lazypeanut.cityrealtimeweather.ui.components.PreviewContainer
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectCityListView
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.components.SelectCityListView
 import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 import com.lazypeanut.cityrealtimeweather.utils.CityInformation
 

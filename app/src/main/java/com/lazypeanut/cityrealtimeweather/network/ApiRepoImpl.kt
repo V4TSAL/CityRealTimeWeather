@@ -29,4 +29,8 @@ class ApiRepoImpl @Inject constructor(
     override suspend fun sendDeviceInformation(deviceInfo: DeviceInformation) {
         apiService.sendDeviceInfo(deviceInfo = deviceInfo)
     }
+
+    override suspend fun getWeatherSummaryForDeviceId(deviceId: String) {
+        apiService.getWeatherSummaryForDeviceId(deviceId = deviceId)
+    }
 }

@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea.components
+package com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

@@ -17,5 +17,8 @@ interface ApiService{
     @POST("device/info")
     suspend fun sendDeviceInfo(@Body deviceInfo: DeviceInformation): Unit
 
+    @GET("weather/device")
+    suspend fun getWeatherSummaryForDeviceId(@Query("deviceId") deviceId: String): Unit
+
 
 }

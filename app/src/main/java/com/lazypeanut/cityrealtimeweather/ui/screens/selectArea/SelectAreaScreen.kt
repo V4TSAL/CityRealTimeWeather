@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea
+package com.lazypeanut.cityrealtimeweather.ui.screens.selectArea
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,11 +22,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomButton
 import com.lazypeanut.cityrealtimeweather.ui.components.CustomSearchBar
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.bottomSheet.SelectCityBottomSheet
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.CurrentSelectedCityItem
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.components.SelectLocalityGridView
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.state.SelectAreaScreenState
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.state.rememberSelectAreaScreenState
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.bottomSheet.SelectCityBottomSheet
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.components.CurrentSelectedCityItem
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.components.SelectLocalityGridView
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.state.SelectAreaScreenState
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.state.rememberSelectAreaScreenState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

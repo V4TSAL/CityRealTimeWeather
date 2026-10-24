@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.lazypeanut.cityrealtimeweather.ui.components.BaseScreen
-import com.lazypeanut.cityrealtimeweather.ui.selectArea.SelectAreaScreen
+import com.lazypeanut.cityrealtimeweather.ui.screens.selectArea.SelectAreaScreen
 import com.lazypeanut.cityrealtimeweather.ui.theme.AppTheme
 import com.lazypeanut.cityrealtimeweather.ui.theme.CityRealTimeWeatherTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,6 +24,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.getWeatherSummaryForDeviceId()
         enableEdgeToEdge()
         setContent {
             CityRealTimeWeatherTheme {

@@ -1,4 +1,4 @@
-package com.lazypeanut.cityrealtimeweather.ui.selectArea
+package com.lazypeanut.cityrealtimeweather.ui.screens.selectArea
 
 import androidx.lifecycle.ViewModel
 import com.lazypeanut.cityrealtimeweather.utils.CityInformation
